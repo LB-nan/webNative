@@ -3,10 +3,12 @@ window.onload = function (){
     var oHeader =document.querySelector('header');
     var oArrow = $('arrow');
     var oContent = $('content');
+    var oWorksContent = $('worksContent');
     var oList = document.getElementById('list');
     var aLiNav = oNav.getElementsByTagName('li');
     var aLiList = getByClass(oList,'liList');
     var aDivList = getByClass(oList,'divList');
+    var aWorksContent2 = getByClass(oWorksContent,'worksContent2')[0];
     console.log(aDivList.length)
     var iContentHeight = 0;
     var iNow = 0;
@@ -14,6 +16,8 @@ window.onload = function (){
     contentAuto();
     iDivListAuto();
     mouseWheel();
+    toMove(2);
+    workContent();
     // view change image height auto
     window.onresize = fnResize;
     function fnResize(){
@@ -33,6 +37,29 @@ window.onload = function (){
             };
         }
     }
+
+    // create works content
+    function workContent(){  // aWorksContent2
+        var data = [
+            {img:'img/worksimg1.jpg', text:'测试文字啊啊啊啊啊啊啊阿'},
+            {img:'img/worksimg2.jpg', text:'测试文字啊啊啊啊啊啊啊阿大'},
+            {img:'img/worksimg3.jpg', text:'测试文字啊啊啊啊啊啊啊阿大声'},
+            {img:'img/worksimg4.jpg', text:'测试文字啊啊啊啊啊啊啊阿大声道'}
+        ];
+        var strData = [];
+        for (let i = 0; i < data.length; i++) {
+           var str = `<div class="worksImgParent">
+                        <img class="worksImg" src="${data[i].img}">
+                        <div class="worksImgMark">
+                            <span>${data[i].text}</span>
+                            <div></div>
+                        </div>
+                     </div>`;
+            strData.push(str);
+        }
+        aWorksContent2.innerHTML = strData;
+    }
+
 
     // mouseWheel view change
     function mouseWheel(){
