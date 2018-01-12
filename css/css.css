@@ -1,0 +1,52 @@
+/*reset start*/
+html,body{overflow: hidden;height: 100%}
+body,h1,h2,h3,h4,ul,ol,p{padding: 0;margin: 0;font:14px '微软雅黑'}
+li{list-style: none;}
+img{border: none;}
+a{text-decoration: none;}
+a:active{color: #009ee0;}
+/* reset end*/
+
+
+/* common start*/
+.clear{zoom: 1;}
+.clear::after{content: '';display: block;clear: both;}
+/* common end*/
+
+
+/* frame start */
+#main { width: 100%;height: 100%; }
+header{ width: 100%; height: 80px;background: white;}
+#headerMain{width: 80%;height: 100%;margin: 0 auto; position: relative; }
+#logo{float: left; margin-top: 30px;}
+#nav{float: right; margin-top: 50px;}
+#nav li{ float:left; position:relative; margin-left:40px;}
+#nav li .up{ position:absolute; left:0; top:0; color:black; width:0%; overflow:hidden; transition:.5s width;}
+#nav li:hover .up{width:100%;}
+#arrow{  width: 0; height: 0; border-left: 11px solid transparent; border-right: 11px solid transparent; border-top: 22px solid white; position: absolute;bottom: -11px;transition: 0.75s;z-index: 10;}
+/*body content*/
+#content{ width: 100%; position: relative;overflow: hidden;}
+#list{position: absolute;top: 0px;left: 0; width: 100%; transition: 0.75s top;}
+#list .liList{width: 2000px;position: relative;left: 50%; margin-left: -1000px;}
+/* frame end */
+
+
+/* home start*/
+#home{ background: url(../img/bg1.jpg) no-repeat }
+/* home end */
+
+/* course start  */
+#course{ background: url(../img/bg3.jpg) no-repeat }
+/* course end */
+
+/* works start */
+#works{ background: url(../img/bg4.jpg) no-repeat }
+/* works end */
+
+/* about  start */
+#about{ background: url(../img/bg5.jpg) no-repeat }
+/* about end */
+
+/* team start */
+#team{ background: url(../img/bg2.jpg) no-repeat }
+/* team end */
