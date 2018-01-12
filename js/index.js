@@ -6,15 +6,19 @@ window.onload = function (){
     var oList = document.getElementById('list');
     var aLiNav = oNav.getElementsByTagName('li');
     var aLiList = getByClass(oList,'liList');
+    var aDivList = getByClass(oList,'divList');
+    console.log(aDivList.length)
     var iContentHeight = 0;
     var iNow = 0;
     bindNav();
-    contentAuto()
-
+    contentAuto();
+    iDivListAuto();
+    mouseWheel();
     // view change image height auto
     window.onresize = fnResize;
     function fnResize(){
         contentAuto();
+        iDivListAuto();
     }
     // bind event to nav
     function bindNav(){
@@ -30,6 +34,67 @@ window.onload = function (){
         }
     }
 
+    // mouseWheel view change
+    function mouseWheel(){
+        var btn = true;
+        var timer = null;
+        //
+        if(oContent.addEventListener){
+            oContent.addEventListener('DOMMouseScroll',function(e){
+                var e = e || window.event;
+                clearTimeout(timer);
+                timer = setTimeout(function(e){
+                    toChange();
+                },200)
+            },false);
+        }
+        oContent.onmousewheel = function(e){
+            var e = e || window.event;
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                toChange(e);
+            },200)
+        };
+        function toChange(e){
+            // DOMMouseScroll对应的方法是e.detail  下是正数 上是负数
+            // onmousewheel对应的方法是e.wheelDelta   下负数  上正数
+            // alert(e.detail);
+            if(e.detail){
+                // btn ? down : up
+                btn = e.detail > 0 ? true : false;
+            }else{
+                // btn ? up : down
+                btn = e.wheelDelta > 0 ? false : true;
+            }
+
+            if(btn){ // up
+                iNow++;
+                if(iNow > aDivList.length-1){
+                    iNow = aDivList.length-1;
+                }
+                toMove(iNow);
+            } else { // down
+                iNow--;
+                if(iNow < 0){
+                    iNow = 0;
+                }
+                toMove(iNow);
+            }
+            if(e.preventDefault){
+                e.preventDefault();
+            }else{
+                return false;
+            }
+        };
+    }
+
+    // divList center
+    function iDivListAuto(){
+        var divAuto = (iContentHeight-520)/2;
+        for (let i = 0; i < aDivList.length; i++) {
+            aDivList[i].style.marginTop = divAuto + 'px';
+        }
+    }
 
     // set liList and content height
     function contentAuto(){
