@@ -20,7 +20,7 @@ window.onload = function (){
     iDivListAuto();
     mouseWheel();
     homeContent();
-     toMove(1);
+   //  toMove(1);
     workContent();
     // view change image height auto
     window.onresize = fnResize;
