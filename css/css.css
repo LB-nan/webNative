@@ -12,6 +12,7 @@ a:active{color: #009ee0;}
 .clear{zoom: 1;}
 .clear::after{content: '';display: block;clear: both;}
 .commonTitle{color: #009ee0;font-size: 80px;line-height: 0.8;font-weight: bold;letter-spacing: -5px;}
+.commonText{color: white;font-size: 16px;line-height: 1.5;}
 /* common end*/
 
 
@@ -34,15 +35,89 @@ header{ width: 100%; height: 80px;background: white;}
 
 
 /* home start*/
-#home{ background: url(../img/bg1.jpg) no-repeat }
+#home{ background: url(../img/bg1.jpg) no-repeat; }
+#homeContent .homeContent1{width: 100%;height: 100%; position: relative;-webkit-perspective: 800px;-webkit-transform-style: preserve-3d;perspective: 800px;transform-style: preserve-3d;}
+#homeContent .homeContent1 li{width: 100%;height: 100%;position: absolute; top: 0;left: 0;visibility: hidden;}
+#homeContent .homeContent1 li:nth-of-type(1){background:#dc6c5f;}
+#homeContent .homeContent1 li:nth-of-type(2){background:#95dc84;}
+#homeContent .homeContent1 li:nth-of-type(3){background:#64b9b2;}
+#homeContent .homeContent1 li h2{height: 100%; color: white;transform: translateY(50%);margin-top:-40px;text-align: center;}
+#homeContent .homeContent1 li.active{z-index: 1; visibility: visible;}
+#homeContent .homeContent2{ position: absolute;bottom: 10px;z-index: 2;text-align: center;width: 100%;}
+#homeContent .homeContent2 li{width: 20px;height: 20px;border-radius: 50%;background: rgba(255,255,255,0.5);display: inline-block;box-shadow:0 0 8px rgba(25,25,25,0.8); cursor: pointer;margin-left: 4px;}
+#homeContent .homeContent2 li.active{background: white;cursor: default;}
+
+#homeContent .homeContent1 .leftShow{-webkit-animation: 1s homeLeftShow; animation: 1s homeLeftShow; visibility: visible;z-index: 3;}
+#homeContent .homeContent1 .rightHide{-webkit-animation: 1s homeRightHide; animation: 1s homeRightHide; visibility: hidden;}
+#homeContent .homeContent1 .rightShow{-webkit-animation: 1s homeRightShow; animation: 1s homeRightShow; visibility: visible;z-index: 3;}
+#homeContent .homeContent1 .leftHide{-webkit-animation: 1s homeLeftHide; animation: 1s homeLeftHide; visibility: hidden;}
+
+@-webkit-keyframes homeLeftShow{
+    0%{-webkit-transform: translateZ(-200px);}
+    50%{-webkit-transform: translate(-40%,0) scale(0.8) rotateY(20deg);}
+    100%{-webkit-transform: translateZ(0px);}
+}
+
+@-webkit-keyframes homeRightHide{
+    0%{-webkit-transform: translateZ(0px);visibility: visible;}
+    50%{-webkit-transform: translate(40%,0) scale(0.8) rotateY(-20deg);}
+    100%{-webkit-transform: translateZ(-200px);}
+}
+
+@-webkit-keyframes homeRightShow{
+    0%{-webkit-transform: translateZ(-200px);}
+    50%{-webkit-transform: translate(40%,0) scale(0.8) rotateY(-20deg);}
+    100%{-webkit-transform: translateZ(0px);}
+}
+
+@-webkit-keyframes homeLeftHide{
+    0%{-webkit-transform: translateZ(0px);visibility: visible;}
+    50%{-webkit-transform: translate(-40%,0) scale(0.8) rotateY(20deg);}
+    100%{-webkit-transform: translateZ(-200px);}
+}
+
+/* 下面没有加-webkit- */
+
+@keyframes homeLeftShow{
+    0%{transform: translateZ(-200px);}
+    50%{transform: translate(-40%,0) scale(0.8) rotateY(20deg);}
+    100%{transform: translateZ(0px);}
+}
+
+@keyframes homeRightHide{
+    0%{transform: translateZ(0px);visibility: visible;}
+    50%{transform: translate(40%,0) scale(0.8) rotateY(-20deg);}
+    100%{transform: translateZ(-200px);}
+}
+@keyframes homeRightShow{
+    0%{transform: translateZ(-200px);}
+    50%{transform: translate(40%,0) scale(0.8) rotateY(-20deg);}
+    100%{transform: translateZ(0px);}
+}
+
+@keyframes homeLeftHide{
+    0%{transform: translateZ(0px);visibility: visible;}
+    50%{transform: translate(-40%,0) scale(0.8) rotateY(20deg);}
+    100%{transform: translateZ(-200px);}
+}
+
 /* home end */
 
 /* course start  */
-#course{ background: url(../img/bg3.jpg) no-repeat }
+#course{ background: url(../img/bg3.jpg) no-repeat; }
+#course .courseContent1{padding: 50px;}
+#course .courseContent2{width: 400px;padding-left: 50px;}
+#course .courseContent3{width: 480px;position: absolute;right: 50px;top: 80px;}
+#course .courseLine{width: 9px;height: 410px;background: url(../img/plus_row.png) no-repeat;position: absolute;left: 0;top: 0;margin-top: -4px;margin-left: -6px;}
+#course .courseLogo{width: 120px;height: 132px;float: left;margin-top: 1px;position: relative;cursor: pointer;-webkit-perspective: 800px;  perspective: 800px;}
+#course .courseBefore{width: 100%;height: 100%;position: absolute;top: 0;left: 0; background-repeat: no-repeat;background-position: center center; backface-visibility: hidden;transition: 1s;}
+#course .courseAfter{width: 100%;height: 100%;position: absolute;top: 0;left: 0;background: #009ee0;color: white;padding: 15px;box-sizing: border-box;-webkit-transform: rotateY(-180deg); backface-visibility: hidden;-webkit-transition: 1s;transition: 1s;transform: rotateY(-180deg);}
+#course .courseLogo:hover .courseBefore{-webkit-transform: rotateY(180deg);transform: rotateY(180deg);}
+#course .courseLogo:hover .courseAfter{-webkit-transform: rotateY(0deg);transform: rotateY(0deg);}
 /* course end */
 
 /* works start */
-#works{ background: url(../img/bg4.jpg) no-repeat }
+#works{ background: url(../img/bg4.jpg) no-repeat; }
 #worksContent .worksContent1{padding: 50px 0 100px 50px }
 #worksContent .worksContent2{padding-left:50px;position: relative;}
 #worksContent .worksContent3{width: 167px;height: 191px;background: url(../img/robot.png) no-repeat;position: absolute;left: 900px;top: 170px; -webkit-animation: 10s linear infinite worksMove;transition: 0.5s left;animation: 10s linear infinite worksMove;transition: 0.5s left;}
@@ -69,9 +144,9 @@ header{ width: 100%; height: 80px;background: white;}
 /* works end */
 
 /* about  start */
-#about{ background: url(../img/bg5.jpg) no-repeat }
+#about{ background: url(../img/bg5.jpg) no-repeat; }
 /* about end */
 
 /* team start */
-#team{ background: url(../img/bg2.jpg) no-repeat }
+#team{ background: url(../img/bg2.jpg) no-repeat; }
 /* team end */

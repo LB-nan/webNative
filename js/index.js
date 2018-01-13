@@ -9,14 +9,18 @@ window.onload = function (){
     var aLiList = getByClass(oList,'liList');
     var aDivList = getByClass(oList,'divList');
     var aWorksContent2 = getByClass(oWorksContent,'worksContent2')[0];
-    console.log(aDivList.length)
     var iContentHeight = 0;
     var iNow = 0;
+    var oHomeContent = $('homeContent');
+    var oHomeContent1 = getByClass(oHomeContent,'homeContent1')[0];
+    var oHomeContent2 = getByClass(oHomeContent,'homeContent2')[0];
+
     bindNav();
     contentAuto();
     iDivListAuto();
     mouseWheel();
-    toMove(2);
+    homeContent();
+     toMove(1);
     workContent();
     // view change image height auto
     window.onresize = fnResize;
@@ -144,6 +148,55 @@ window.onload = function (){
             oArrow.style.left = aLiNav[index].offsetLeft + aLiNav[index].offsetWidth/2 - oArrow.offsetWidth/2 + 'px';
             oList.style.top = -index * iContentHeight + 'px';
     }
+
+    // 给第一屏的小圆点加点击事件
+    function homeContent(){
+        var aLi1 = oHomeContent1.getElementsByTagName('li');
+        var aLi2 = oHomeContent2.getElementsByTagName('li');
+        var oldIndex= 0;
+        var iNowHome = 0;
+        for (let i = 0; i < aLi2.length; i++) {
+            aLi2[i].index = i;
+            aLi2[i].onclick = function(){
+                for (let i = 0; i < aLi2.length; i++){
+                    aLi2[i].className = '';
+                }
+                this.className = 'active';
+                if(oldIndex < this.index){ // 从左向右
+                    aLi1[oldIndex].className = 'leftHide';
+                    aLi1[this.index].className = 'rightShow';
+                } else if(oldIndex > this.index){  // 从右向左
+                    aLi1[oldIndex].className = 'rightHide';
+                    aLi1[this.index].className = 'leftShow';
+                }
+                oldIndex = this.index; // 更新oldIndex
+                iNowHome = this.index;
+            }
+        }
+        // 自动播放
+        var timer =  setInterval(change,3000);
+        
+        oHomeContent.onmouseover = function(){
+            clearInterval(timer);
+        }
+        
+
+        function change(){
+            iNowHome++;
+            if(iNowHome >= aLi2.length){
+                iNowHome = 0;
+            }
+            for (let i = 0; i < aLi2.length; i++){
+                aLi2[i].className = '';
+            }
+            aLi2[iNowHome].className = 'active';
+            aLi1[oldIndex].className = 'leftHide';
+            aLi1[iNowHome].className = 'rightShow';
+            oldIndex = iNowHome;
+        }
+    }
+
+    
 
     // get element id
     function $(id){
