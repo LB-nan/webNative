@@ -24,8 +24,12 @@ window.onload = function (){
     iDivListAuto();
     mouseWheel();
     homeContent();
+<<<<<<< HEAD
     // toMove(3);
     aboutContent()
+=======
+   //  toMove(1);
+>>>>>>> 8fc2b92e5fb509b7783c047ff89535b1b53ddf6f
     workContent();
     // view change image height auto
     window.onresize = fnResize;
@@ -279,4 +283,4 @@ window.onload = function (){
         }
         return arr;
     }
-}
+}}
