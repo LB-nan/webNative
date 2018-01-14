@@ -14,13 +14,18 @@ window.onload = function (){
     var oHomeContent = $('homeContent');
     var oHomeContent1 = getByClass(oHomeContent,'homeContent1')[0];
     var oHomeContent2 = getByClass(oHomeContent,'homeContent2')[0];
+    var oAboutContent = $('aboutContent');
+    var oAboutContent3 = getByClass(oAboutContent,'aboutContent3')[0];
+    var menu = $('menu');
+    var menuLi = menu.getElementsByTagName('li');
 
     bindNav();
     contentAuto();
     iDivListAuto();
     mouseWheel();
     homeContent();
-     toMove(1);
+    // toMove(3);
+    aboutContent()
     workContent();
     // view change image height auto
     window.onresize = fnResize;
@@ -28,6 +33,7 @@ window.onload = function (){
         contentAuto();
         iDivListAuto();
     }
+
     // bind event to nav
     function bindNav(){
         var oDiv = aLiNav[0].getElementsByTagName('div')[0];
@@ -39,6 +45,13 @@ window.onload = function (){
                 toMove(this.index);
                 iNow = this.index;
             };
+        }
+        for (let i = 0; i < menuLi.length; i++) {
+            menuLi[i].index = i;
+            menuLi[i].onclick = function(){
+                toMove(this.index);
+                iNow = this.index;
+            }
         }
     }
 
@@ -141,8 +154,10 @@ window.onload = function (){
     function toMove(index){
             for (let i = 0; i < aLiNav.length; i++) {
                 var oDiv = aLiNav[i].getElementsByTagName('div')[0];
+                menuLi[i].className = '';
                 oDiv.style.width = ''; 
             }
+            menuLi[index].className = 'active';
             var oDiv = aLiNav[index].getElementsByTagName('div')[0];
             oDiv.style.width = '100%';
             oArrow.style.left = aLiNav[index].offsetLeft + aLiNav[index].offsetWidth/2 - oArrow.offsetWidth/2 + 'px';
@@ -175,12 +190,9 @@ window.onload = function (){
         }
         // 自动播放
         var timer =  setInterval(change,3000);
-        
         oHomeContent.onmouseover = function(){
             clearInterval(timer);
         }
-        
-
         function change(){
             iNowHome++;
             if(iNowHome >= aLi2.length){
@@ -196,7 +208,51 @@ window.onload = function (){
         }
     }
 
-    
+
+    function aboutContent(){
+        var aUl = oAboutContent3.getElementsByTagName('ul');
+        var aSpan = oAboutContent3.getElementsByTagName('span');
+        for (let i = 0; i < aUl.length; i++) {
+            change(aUl[i]);
+        }
+        function change(ul){
+            var w = ul.offsetWidth/2;
+            var h = ul.offsetHeight/2;
+            var src = ul.dataset.src;
+
+            for(var i = 0; i < 4; i++){
+                var oLi = document.createElement('li');
+                oLi.style.width = w +'px';
+                oLi.style.height = h +'px';
+                var oImg = document.createElement('img');
+                oImg.src = src;
+                oImg.style.left = -i%2 * w +'px';
+                oImg.style.top = -Math.floor(i/2) *h + 'px';
+                oImg.oldleft = -i%2 * w ;
+                oImg.oldtop = -Math.floor(i/2) *h;
+                oLi.appendChild(oImg);
+                ul.appendChild(oLi);
+            }
+
+            var data = [
+                {name:'top', value : h},
+                {name:'left', value : -w*2},
+                {name:'left', value : w},
+                {name:'top', value : -h*2}
+            ]
+            var aImg = ul.getElementsByTagName('img');
+            ul.onmouseover = function(){
+               for (let i = 0; i < aImg.length; i++) {
+                aImg[i].style[data[i].name] = data[i].value + 'px';
+               }
+            }
+            ul.onmouseout = function(){
+                for (let i = 0; i < aImg.length; i++) {
+                 aImg[i].style[data[i].name] = aImg[i]['old'+data[i].name] + 'px';
+                }
+             }
+        }
+    }
 
     // get element id
     function $(id){

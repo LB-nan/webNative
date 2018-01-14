@@ -5,6 +5,9 @@ li{list-style: none;}
 img{border: none;}
 a{text-decoration: none;}
 a:active{color: #009ee0;}
+#menu{position: fixed;right: 20px;top: 46%;z-index: 5;}
+#menu li{width: 14px;height: 14px;border-radius: 50%;border: 1px solid white; margin-top: 10px;cursor: pointer;}
+#menu li.active{background: white;cursor: default;}
 /* reset end*/
 
 
@@ -145,6 +148,17 @@ header{ width: 100%; height: 80px;background: white;}
 
 /* about  start */
 #about{ background: url(../img/bg5.jpg) no-repeat; }
+#aboutContent .aboutContent1{padding: 50px;}
+#aboutContent .aboutContent2{padding: 50px;width: 400px;}
+.blueLine{width: 357px;height: 998px;background: url(../img/greenLine.png) no-repeat;position: absolute;left: 50%;top: 0;}
+#aboutContent .aboutImg{position: absolute;width: 260px;height: 200px;border: 5px solid rgba(255, 255,255, 0.5);border-radius: 8px;z-index: 3;overflow: hidden;cursor: pointer;}
+#aboutContent .aboutImg:nth-of-type(1){left: 750px;top: 50px;}
+#aboutContent .aboutImg:nth-of-type(2){left: 600px;top: 290px;}
+#aboutContent .aboutImg ul{width: 100%; height: 100%; position: absolute;top: 0;left: 0;z-index: 5;}
+#aboutContent .aboutImg ul li{float: left; position: relative; overflow: hidden;}
+#aboutContent .aboutImg ul li img{position: absolute;transition: 0.75s;}
+#aboutContent .aboutImg span{width: 100%;height: 100%;position: absolute;top: 0;left: 0;transform: scale(1.5);transition: 0.75s;}
+#aboutContent .aboutImg:hover span{transform: scale(1);}
 /* about end */
 
 /* team start */
