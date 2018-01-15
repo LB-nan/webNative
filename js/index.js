@@ -16,6 +16,8 @@ window.onload = function (){
     var oHomeContent2 = getByClass(oHomeContent,'homeContent2')[0];
     var oAboutContent = $('aboutContent');
     var oAboutContent3 = getByClass(oAboutContent,'aboutContent3')[0];
+    var oTeamContent = $('teamContent');
+    var oTeamContent3 = getByClass(oTeamContent,'teamContent3')[0];
     var menu = $('menu');
     var menuLi = menu.getElementsByTagName('li');
 
@@ -25,6 +27,9 @@ window.onload = function (){
     mouseWheel();
     homeContent();
     workContent();
+    teamContent();
+    aboutContent();
+   // toMove(4);
     // view change image height auto
     window.onresize = fnResize;
     function fnResize(){
@@ -249,6 +254,112 @@ window.onload = function (){
                  aImg[i].style[data[i].name] = aImg[i]['old'+data[i].name] + 'px';
                 }
              }
+        }
+    }
+
+    // teamContent
+    function teamContent(){
+        var oC = null;
+        var w = 118;
+        var timer1 = null;
+        var timer2 = null;
+        create();
+        bindList();
+        function create(){
+            var ul = document.createElement('ul');
+            for(var i = 0; i < 8; i++){
+                var li = document.createElement('li');
+                li.style.backgroundPosition = -(i*w) + 'px 0';
+                ul.appendChild(li);
+            }
+            oTeamContent3.appendChild(ul);  
+        }
+        function bindList(){
+            var aLi =  oTeamContent3.getElementsByTagName('li');
+
+            oTeamContent3.onmouseleave = function(){
+                removeCanvas();
+            };
+
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].index = i;
+                aLi[i].onmouseover = function(){
+                    addCanvas();
+                    oC.style.left = this.index * w+ 'px';
+                }
+            }
+        }
+        function addCanvas(){
+            if(!oC){
+                oC = document.createElement('canvas');
+                oC.id = 'canvasBubble';
+                oC.width = w;
+                oC.height = '300';
+                oTeamContent3.appendChild(oC);
+                bindCanvas();
+            }
+        }
+        function removeCanvas(){
+            clearInterval(timer1);
+            clearInterval(timer2);
+            oTeamContent3.removeChild(oC);
+            oC = null;
+        }
+        function bindCanvas(){
+            var oGC = oC.getContext('2d');
+            var setArr = [];
+            timer2 = setInterval(function(){
+            	oGC.clearRect(0,0,oC.width,oC.height);
+            	for(var i = 0; i < setArr.length; i++){
+            		 //setArr[i].c4 -= 0.01;
+            		setArr[i].num += 5;
+            		setArr[i].x = setArr[i].startX - Math.sin( setArr[i].num * Math.PI/180 ) * setArr[i].step;
+            		setArr[i].y = setArr[i].startY - (setArr[i].num * Math.PI/180 ) * setArr[i].step;
+            		if(setArr[i].y  <= 50){
+            			setArr[i].c4 -= 0.01;
+                        setArr.splice(i,1);
+                        //console.log('清楚了')
+            		}
+            	}
+            	for(var i = 0; i < setArr.length; i++){
+            		// 填充颜色， 颜色值是随机的
+			        oGC.fillStyle = 'rgba('+setArr[i].c1+','+setArr[i].c2+','+setArr[i].c3+','+setArr[i].c4+')';
+			        // 路径开始
+					oGC.beginPath();
+					// 保存一个坐标
+						oGC.moveTo(setArr[i].x,setArr[i].y);
+						oGC.arc(setArr[i].x,setArr[i].y,setArr[i].r,0,360*Math.PI/180);
+					oGC.closePath();
+					oGC.fill();
+            	}
+            },1000/60);
+            
+            timer1 = setInterval(function(){
+            	var x = Math.random()*oC.width;
+            	var y = oC.height - 10;
+            	var r = Math.random()*6 + 2;
+            	var c1 =Math.round( Math.random()*255 );
+            	var c2 =Math.round( Math.random()*255 );
+            	var c3 =Math.round( Math.random()*255 );
+            	var c4 = 1;
+            	var num = 0;
+            	var startX = x;
+            	var startY = y;
+            	var step = Math.random()*20 + 10;
+            	setArr.push({
+            		x,
+            		y,
+            		r,
+            		c1,
+            		c2,
+            		c3,
+            		c4,
+            		num,
+            		step,
+            		startX,
+            		startY
+            	})
+            },100);
         }
     }
 
