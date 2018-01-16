@@ -76,8 +76,7 @@ window.onload = function (){
         aDiv[0].addEventListener('transitionend',divChenge,false);
         function divChenge(){
             loading.parentNode.removeChild(loading);
-            audio1.play();
-            music.style.background = 'url(img/musicon.gif)';
+           music.onclick();
             cjAnimate[0].inAn();
         }
     }
