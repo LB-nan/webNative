@@ -11,6 +11,7 @@ window.onload = function (){
     var aWorksContent2 = getByClass(oWorksContent,'worksContent2')[0];
     var iContentHeight = 0;
     var iNow = 0;
+    var oCourseContent = $('courseContent');
     var oHomeContent = $('homeContent');
     var oHomeContent1 = getByClass(oHomeContent,'homeContent1')[0];
     var oHomeContent2 = getByClass(oHomeContent,'homeContent2')[0];
@@ -20,6 +21,12 @@ window.onload = function (){
     var oTeamContent3 = getByClass(oTeamContent,'teamContent3')[0];
     var menu = $('menu');
     var menuLi = menu.getElementsByTagName('li');
+    var prevIndex = 0;
+    var music = $('music');
+    var audio1 = $('audio');
+    var loading = $('loading');
+
+    showLoading();
 
     bindNav();
     contentAuto();
@@ -29,12 +36,65 @@ window.onload = function (){
     workContent();
     teamContent();
     aboutContent();
-   // toMove(4);
+    showMusic();
+
+
+
     // view change image height auto
     window.onresize = fnResize;
     function fnResize(){
         contentAuto();
         iDivListAuto();
+    }
+
+    function showLoading(){
+        var oSpan = loading.getElementsByTagName('span')[0];
+        var aDiv = loading.getElementsByTagName('div');
+        var arr = ['img/bg1.jpg','img/bg2.jpg','img/bg3.jpg','img/bg4.jpg','img/bg5.jpg','img/about1.jpg','img/about2.jpg','img/about3.jpg','img/about4.jpg','img/worksimg1.jpg','img/worksimg2.jpg','img/worksimg3.jpg','img/worksimg4.jpg','img/greenLine.png','img/team.png','img/pencel1.png','img/pencel2.png','img/pencel3.png','img/plane1.png','img/plane2.png','img/plane3.png','img/robot.png'];
+        var num = 0;
+        for (let i = 0; i < arr.length; i++) {
+            var objImg = new Image();
+            objImg.src = arr[i];
+            objImg.onload = function(){
+                num++;
+                oSpan.style.width = num/arr.length*100 + '%';
+                // if(num == arr.length){
+                //     console.log('加载成功');
+                // }
+            }
+        }
+        oSpan.addEventListener('webkitTransitionend',spanChenge,false);
+        oSpan.addEventListener('transitionend',spanChenge,false);
+        function spanChenge(){
+            if(oSpan.style.width == '100%'){
+                oSpan.style.display = 'none';
+                aDiv[0].style.height = 0;
+                aDiv[1].style.height = 0;
+            }
+        }
+        aDiv[0].addEventListener('webkitTransitionend',divChenge,false);
+        aDiv[0].addEventListener('transitionend',divChenge,false);
+        function divChenge(){
+            loading.parentNode.removeChild(loading);
+            audio1.play();
+            music.style.background = 'url(img/musicon.gif)';
+            cjAnimate[0].inAn();
+        }
+    }
+
+    function showMusic(){
+        var onoff = true;
+        music.onclick = function(){
+            if(onoff){
+                this.style.background = 'url(img/musicon.gif)';
+                audio1.play();
+            }else{
+                this.style.background = 'url(img/musicoff.gif)';
+                audio1.pause();
+            }
+            onoff = !onoff;
+        }
+        
     }
 
     // bind event to nav
@@ -45,15 +105,17 @@ window.onload = function (){
         for (let i = 0; i < aLiNav.length; i++) {
             aLiNav[i].onmousedown = function (){
                 aLiNav[i].index = i; 
-                toMove(this.index);
+                prevIndex = iNow;
                 iNow = this.index;
+                toMove(this.index);
             };
         }
         for (let i = 0; i < menuLi.length; i++) {
             menuLi[i].index = i;
             menuLi[i].onclick = function(){
-                toMove(this.index);
+                prevIndex = iNow;
                 iNow = this.index;
+                toMove(this.index);
             }
         }
     }
@@ -113,17 +175,23 @@ window.onload = function (){
                 // btn ? up : down
                 btn = e.wheelDelta > 0 ? false : true;
             }
-
+            prevIndex = iNow;
             if(btn){ // up
                 iNow++;
                 if(iNow > aDivList.length-1){
                     iNow = aDivList.length-1;
+                }
+                if( prevIndex == 4){
+                    prevIndex = 3;
                 }
                 toMove(iNow);
             } else { // down
                 iNow--;
                 if(iNow < 0){
                     iNow = 0;
+                }
+                if( prevIndex == 0){
+                    prevIndex = 1;
                 }
                 toMove(iNow);
             }
@@ -165,6 +233,15 @@ window.onload = function (){
             oDiv.style.width = '100%';
             oArrow.style.left = aLiNav[index].offsetLeft + aLiNav[index].offsetWidth/2 - oArrow.offsetWidth/2 + 'px';
             oList.style.top = -index * iContentHeight + 'px';
+
+            if(cjAnimate[index].inAn){
+                cjAnimate[index].inAn();
+            } 
+            //prevIndex
+            if(cjAnimate[prevIndex].outAn){
+                console.log(prevIndex);
+                cjAnimate[prevIndex].outAn();
+            }
     }
 
     // 给第一屏的小圆点加点击事件
@@ -363,6 +440,103 @@ window.onload = function (){
         }
     }
 
+
+    // 出入场动画
+    var cjAnimate = [
+		{
+			inAn : function(){
+				oHomeContent1.style.opacity = 1;
+				oHomeContent2.style.opacity = 1;
+				setStyle(oHomeContent1,'transform','translate(0,0)');
+				setStyle(oHomeContent2,'transform','translate(0,0)');
+			},
+			outAn : function(){
+				oHomeContent1.style.opacity = 0;
+				oHomeContent2.style.opacity = 0;
+				setStyle(oHomeContent1,'transform','translate(0,-150px)');
+				setStyle(oHomeContent2,'transform','translate(0,100px)');
+			}
+		},
+		{
+			inAn : function(){
+				var oPlane1 = getByClass(oCourseContent,'plane1')[0];
+				var oPlane2 = getByClass(oCourseContent,'plane2')[0];
+				var oPlane3 = getByClass(oCourseContent,'plane3')[0];
+				setStyle(oPlane1 , 'transform','translate(0,0)');
+				setStyle(oPlane2 , 'transform','translate(0,0)');
+				setStyle(oPlane3 , 'transform','translate(0,0)');
+			},
+			outAn : function(){
+				var oPlane1 = getByClass(oCourseContent,'plane1')[0];
+				var oPlane2 = getByClass(oCourseContent,'plane2')[0];
+				var oPlane3 = getByClass(oCourseContent,'plane3')[0];
+				setStyle(oPlane1 , 'transform','translate(-200px,-200px)');
+				setStyle(oPlane2 , 'transform','translate(-200px,200px)');
+				setStyle(oPlane3 , 'transform','translate(200px,-200px)');
+			}
+		},
+		{
+			inAn : function(){
+				var oPencel1 = getByClass(oWorksContent,'pencel1')[0];
+				var oPencel2 = getByClass(oWorksContent,'pencel2')[0];
+				var oPencel3 = getByClass(oWorksContent,'pencel3')[0];
+				setStyle(oPencel1 , 'transform','translate(0,0)');
+				setStyle(oPencel2 , 'transform','translate(0,0)');
+				setStyle(oPencel3 , 'transform','translate(0,0)');
+			},
+			outAn : function(){
+				//oWorksContent
+				var oPencel1 = getByClass(oWorksContent,'pencel1')[0];
+				var oPencel2 = getByClass(oWorksContent,'pencel2')[0];
+				var oPencel3 = getByClass(oWorksContent,'pencel3')[0];
+				setStyle(oPencel1 , 'transform','translate(0,-200px)');
+				setStyle(oPencel2 , 'transform','translate(0,200px)');
+				setStyle(oPencel3 , 'transform','translate(0,200px)');
+			}
+		},
+		{
+			inAn : function(){
+				var aAboutImg = getByClass( oAboutContent , 'aboutImg' );
+				setStyle(aAboutImg[0],'transform','rotate(0)');
+				setStyle(aAboutImg[1],'transform','rotate(0)');
+			},
+			outAn : function(){
+				//oAboutContent
+				var aAboutImg = getByClass( oAboutContent , 'aboutImg' );
+				setStyle(aAboutImg[0],'transform','rotate(45deg)');
+				setStyle(aAboutImg[1],'transform','rotate(-45deg)');
+			}
+		},
+		{
+			inAn : function(){
+				var oTeamContent1 = getByClass(oTeamContent , 'teamContent1')[0];
+				var oTeamContent2 = getByClass(oTeamContent , 'teamContent2')[0];
+				oTeamContent1.style.opacity = 1;
+				oTeamContent2.style.opacity = 1;
+				setStyle(oTeamContent1,'transform','translate(0,0)');
+				setStyle(oTeamContent2,'transform','translate(0,0)');
+			},
+			outAn : function(){
+				var oTeamContent1 = getByClass(oTeamContent , 'teamContent1')[0];
+				var oTeamContent2 = getByClass(oTeamContent , 'teamContent2')[0];
+				oTeamContent1.style.opacity = 0;
+				oTeamContent2.style.opacity = 0;
+				setStyle(oTeamContent1,'transform','translate(-200px,0)');
+				setStyle(oTeamContent2,'transform','translate(200px,0)');
+			}
+		}
+    ];
+    // toMove(4);
+    // cjAnimate[4].outAn();
+    // setTimeout(function(){
+    //     cjAnimate[4].inAn();
+    // },2000)
+    for (let i = 0; i < cjAnimate.length; i++) {
+        cjAnimate[i].outAn();
+        
+    }
+    
+
     // get element id
     function $(id){
         return document.getElementById(id);
@@ -384,8 +558,12 @@ window.onload = function (){
             if( aElem[i].className == oClass ){
                 arr.push(aElem[i]);
             }
-            
         }
         return arr;
+    }
+
+    function setStyle(obj,attr,value){
+		obj.style[attr] = value;
+		obj.style['webkit'+attr.substring(0,1).toUpperCase() + attr.substring(1)] = value;
     }
 }

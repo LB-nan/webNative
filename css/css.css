@@ -10,6 +10,12 @@ a:active{color: #009ee0;}
 #menu li.active{background: white;cursor: default;}
 /* reset end*/
 
+#music{width: 14px;height: 14px;background: url(../img/musicoff.gif) no-repeat;float: left;margin: 50px 0 0 5px;cursor: pointer;}
+#loading{}
+#loading div{width: 100%;height: 50%;position: absolute;left: 0;background: #009ee0;z-index: 50;transition: 1s;}
+#loading div:nth-of-type(1){top:0;}
+#loading div:nth-of-type(2){bottom: 0;}
+#loading span{width: 0%;height: 4px;background: white;position: absolute;left: 0;top: 50%;margin-top: -2px;z-index: 60;transition: .5s;}
 
 /* common start*/
 .clear{zoom: 1;}
@@ -48,14 +54,14 @@ header{ width: 100%; height: 80px;background: white;}
 
 /* home start*/
 #home{ background: url(../img/bg1.jpg) no-repeat;}
-#homeContent .homeContent1{width: 100%;height: 100%; position: relative;-webkit-perspective: 800px;-webkit-transform-style: preserve-3d;perspective: 800px;transform-style: preserve-3d;}
+#homeContent .homeContent1{width: 100%;height: 100%; position: relative;-webkit-perspective: 800px;-webkit-transform-style: preserve-3d;perspective: 800px;transform-style: preserve-3d;transition: 1s;}
 #homeContent .homeContent1 li{width: 100%;height: 100%;position: absolute; top: 0;left: 0;visibility: hidden;}
 #homeContent .homeContent1 li:nth-of-type(1){background:#dc6c5f;}
 #homeContent .homeContent1 li:nth-of-type(2){background:#95dc84;}
 #homeContent .homeContent1 li:nth-of-type(3){background:#64b9b2;}
 #homeContent .homeContent1 li h2{height: 100%; color: white;transform: translateY(50%);margin-top:-40px;text-align: center;}
 #homeContent .homeContent1 li.active{z-index: 1; visibility: visible;}
-#homeContent .homeContent2{ position: absolute;bottom: 10px;z-index: 2;text-align: center;width: 100%;}
+#homeContent .homeContent2{ position: absolute;bottom: 10px;z-index: 2;text-align: center;width: 100%;transition: 1s;}
 #homeContent .homeContent2 li{width: 20px;height: 20px;border-radius: 50%;background: rgba(255,255,255,0.5);display: inline-block;box-shadow:0 0 8px rgba(25,25,25,0.8); cursor: pointer;margin-left: 4px;}
 #homeContent .homeContent2 li.active{background: white;cursor: default;}
 
@@ -117,22 +123,25 @@ header{ width: 100%; height: 80px;background: white;}
 
 /* course start  */
 #course{ background: url(../img/bg3.jpg) no-repeat; }
-#course .courseContent1{padding: 50px;}
-#course .courseContent2{width: 400px;padding-left: 50px;}
+#course .courseContent1{padding: 50px;position: relative;z-index: 1;}
+#course .courseContent2{width: 400px;padding-left: 50px;position: relative;z-index: 1;}
 #course .courseContent3{width: 480px;position: absolute;right: 50px;top: 80px;}
-#course .courseLine{width: 9px;height: 410px;background: url(../img/plus_row.png) no-repeat;position: absolute;left: 0;top: 0;margin-top: -4px;margin-left: -6px;}
-#course .courseLogo{width: 120px;height: 132px;float: left;margin-top: 1px;position: relative;cursor: pointer;-webkit-perspective: 800px;  perspective: 800px;z-index: 2;}
+#course .courseLine{width: 9px;height: 410px;background: url(../img/plus_row.png) no-repeat;position: absolute;left: 0;top: 0;margin-top: -4px;margin-left: -6px;z-index: 1;}
+#course .courseLogo{width: 120px;height: 132px;float: left;margin-top: 1px;position: relative;cursor: pointer;-webkit-perspective: 800px;  perspective: 800px;z-index: 1;}
 #course .courseBefore{width: 100%;height: 100%;position: absolute;top: 0;left: 0; background-repeat: no-repeat;background-position: center center; backface-visibility: hidden;transition: 1s;}
 #course .courseAfter{width: 100%;height: 100%;position: absolute;top: 0;left: 0;background: #009ee0;color: white;padding: 15px;box-sizing: border-box;-webkit-transform: rotateY(-180deg); backface-visibility: hidden;-webkit-transition: 1s;transition: 1s;transform: rotateY(-180deg);}
 #course .courseLogo:hover .courseBefore{-webkit-transform: rotateY(180deg);transform: rotateY(180deg);}
 #course .courseLogo:hover .courseAfter{-webkit-transform: rotateY(0deg);transform: rotateY(0deg);}
+#course .plane1{ width:359px; height:283px; background:url(../img/plane1.png) no-repeat; position:absolute; left:300px; top:-100px; transition:1s;}
+#course .plane2{ width:309px; height:249px; background:url(../img/plane2.png) no-repeat; position:absolute; left:-100px; top:200px; transition:1s;}
+#course .plane3{ width:230px; height:182px; background:url(../img/plane3.png) no-repeat; position:absolute; left:300px; top:400px; transition:1s;}
 /* course end */
 
 /* works start */
 #works{ background: url(../img/bg4.jpg) no-repeat; }
-#worksContent .worksContent1{padding: 50px 0 100px 50px }
-#worksContent .worksContent2{padding-left:50px;position: relative;}
-#worksContent .worksContent3{width: 167px;height: 191px;background: url(../img/robot.png) no-repeat;position: absolute;left: 900px;top: 170px; -webkit-animation: 10s linear infinite worksMove;transition: 0.5s left;animation: 10s linear infinite worksMove;transition: 0.5s left;}
+#worksContent .worksContent1{padding: 50px 0 100px 50px;position: relative;z-index: 1; }
+#worksContent .worksContent2{padding-left:50px;position: relative;z-index: 1;}
+#worksContent .worksContent3{width: 167px;height: 191px;background: url(../img/robot.png) no-repeat;position: absolute;left: 900px;top: 170px; -webkit-animation: 10s linear infinite worksMove;transition: 0.5s left;animation: 10s linear infinite worksMove;transition: 0.5s left;z-index: 1;}
 @-webkit-keyframes worksMove{
     0%{}
     49%{-webkit-transform: rotateY(0deg);}
@@ -153,6 +162,9 @@ header{ width: 100%; height: 80px;background: white;}
 #worksContent .worksImgParent:hover .worksImgMark{opacity: 1;}
 .worksImg{transition: 0.5s;}
 #worksContent .worksImgParent:hover .worksImg{transform:scale(1.5) rotate(20deg);}
+#works .pencel1{ width:180px; height:97px; background:url(../img/pencel1.png) no-repeat; position:absolute; transition:1s; left:500px; top:0;}
+#works .pencel2{ width:268px; height:38px; background:url(../img/pencel2.png) no-repeat; position:absolute; transition:1s; left:300px; top:250px;}
+#works .pencel3{ width:441px; height:231px; background:url(../img/pencel3.png) no-repeat; position:absolute; transition:1s; left:650px; top:300px;}
 /* works end */
 
 /* about  start */
@@ -160,7 +172,7 @@ header{ width: 100%; height: 80px;background: white;}
 #aboutContent .aboutContent1{padding: 50px;}
 #aboutContent .aboutContent2{padding: 50px;width: 400px;}
 .blueLine{width: 357px;height: 998px;background: url(../img/greenLine.png) no-repeat;position: absolute;left: 50%;top: 0;}
-#aboutContent .aboutImg{position: absolute;width: 260px;height: 200px;border: 5px solid rgba(255, 255,255, 0.5);border-radius: 8px;z-index: 3;overflow: hidden;cursor: pointer;}
+#aboutContent .aboutImg{position: absolute;width: 260px;height: 200px;border: 5px solid rgba(255, 255,255, 0.5);border-radius: 8px;z-index: 3;overflow: hidden;cursor: pointer;transition: 1s;}
 #aboutContent .aboutImg:nth-of-type(1){left: 750px;top: 50px;}
 #aboutContent .aboutImg:nth-of-type(2){left: 600px;top: 290px;}
 #aboutContent .aboutImg ul{width: 100%; height: 100%; position: absolute;top: 0;left: 0;z-index: 5;}
@@ -172,8 +184,8 @@ header{ width: 100%; height: 80px;background: white;}
 
 /* team start */
 #team{ background: url(../img/bg2.jpg) no-repeat; }
-#teamContent .teamContent1{padding: 50px;float: left;}
-#teamContent .teamContent2{width: 450px;float: right;padding: 50px;}
+#teamContent .teamContent1{padding: 50px;float: left;transition: 1s;}
+#teamContent .teamContent2{width: 450px;float: right;padding: 50px;transition: 1s;}
 #teamContent .teamContent3{position: absolute;bottom: -150px;left: 50%;margin-left: -472px;z-index: 2;}
 #teamContent .teamContent3 ul{width: 100%;}
 #teamContent .teamContent3 li{width: 118px;height: 448px;background: url(../img/team.png) no-repeat;float: left;cursor: pointer;z-index: 2;}
