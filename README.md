@@ -9,6 +9,6 @@
 
 4、canvas制作的小泡泡
 
-预览： https://oldpubcat.github.io/webNative/
+预览： https://LB-nan.github.io/webNative/
 
 
